@@ -91,6 +91,11 @@ app.get('/', (req, res) => {
     res.send('EMA JON SERVER IS RUNNING')
 })
 
+app.get('/hello', (req, res) => {
+    res.send("HELLO FROM HERUKO")
+})
+
+
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
 })
