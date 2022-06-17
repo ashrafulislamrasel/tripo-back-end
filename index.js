@@ -48,14 +48,19 @@ async function run() {
          // All Orders API
         app.post('/allorders', async (req, res) => {
             const allOrder = req.body;
+            allOrder.createdAt = new Date();
             const result = await allorderCollections.insertOne(allOrder);
-            console.log("Order", allOrder);
             res.json(result)
         })
 
         // Get All Ordered Product API
         app.get('/all-orders', async (req, res) => {
-            const cursor = allorderCollections.find({});
+            let query = {};
+            const email = req.query.email;
+            if (email) {
+                query = {email: email}
+            }
+            const cursor = allorderCollections.find(query);
             const allOrders = await cursor.toArray();
             res.send(allOrders);
         })
